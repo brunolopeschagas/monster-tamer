@@ -14,5 +14,5 @@ export const BATTLE_ASSET_KEYS = Object.freeze({
 export const HEATL_BAR_ASSET_KEYS = Object.freeze({
     LEFT_CAP: 'LEFT_CAP',
     RIGHT_CAP: 'RIGHT_CAP',
-    MIDDLE: 'MIDDLE',
+    MIDDLE_CAP: 'MIDDLE',
 });

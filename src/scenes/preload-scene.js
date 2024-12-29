@@ -28,7 +28,7 @@ export class PreloadScene extends Phaser.Scene {
             'assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_left.png'
         );
         this.load.image(
-            HEATL_BAR_ASSET_KEYS.MIDDLE,
+            HEATL_BAR_ASSET_KEYS.MIDDLE_CAP,
             'assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_mid.png'
         );
         this.load.image(
