@@ -10,6 +10,7 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     preload() {
+        console.log(PreloadScene.name + ' preload');
         this.load.image(
             BATTLE_BACKGROUND_ASSET_KEYS.FOREST,
             'assets/images/monster-tamer/battle-backgrounds/forest-background.png'
@@ -42,6 +43,7 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(0,0, BATTLE_BACKGROUND_ASSET_KEYS.FOREST).setOrigin(0, 0);
+        console.log(PreloadScene.name + ' create');
+        this.scene.start(SCENE_KEYS.BATTLE_SCENE);
     }
 }
