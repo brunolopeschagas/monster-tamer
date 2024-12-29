@@ -7,7 +7,6 @@ export class PreloadScene extends Phaser.Scene {
         super({
             key: SCENE_KEYS.PRELOAD_SCENE,
         });
-        console.log(SCENE_KEYS.PRELOAD_SCENE);
     }
 
     preload() {
@@ -31,7 +30,6 @@ export class PreloadScene extends Phaser.Scene {
             HEATL_BAR_ASSET_KEYS.MIDDLE,
             'assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_mid.png'
         );
-
         this.load.image(
             MONSTER_ASSET_KEYS.CARNODUSK,
             'assets/images/monster-tamer/monsters/carnodusk.png'
@@ -44,7 +42,6 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     create() {
-        this.textures.get('background');
-        this.add.image(0,0, BATTLE_BACKGROUND_ASSET_KEYS.FOREST).setOrigin(0);
+        this.add.image(0,0, BATTLE_BACKGROUND_ASSET_KEYS.FOREST).setOrigin(0, 0);
     }
 }
