@@ -1,11 +1,18 @@
 import { BATTLE_ASSET_KEYS, BATTLE_BACKGROUND_ASSET_KEYS, HEATL_BAR_ASSET_KEYS, MONSTER_ASSET_KEYS } from "../assets/asset-keys.js";
 import { BattleMenu } from "../battle/ui/menu/battle_menu.js";
+import { DIRECTION } from "../common/direction.js";
 import Phaser from "../lib/phaser.js";
 import { SCENE_KEYS } from "./scene-keys.js";
 
 
 export class BattleScene extends Phaser.Scene {
+
+    /**@type {BattleMenu} */
     #battleMenu;
+    
+    /**@type {Phaser.Types.Input.Keyboard.CursorKeys} */
+    #cursorKeys
+
     constructor() {
         super({
             key: SCENE_KEYS.BATTLE_SCENE,
@@ -80,6 +87,35 @@ export class BattleScene extends Phaser.Scene {
         this.#battleMenu = new BattleMenu(this);
         this.#battleMenu.showMainBattleMenu();
 
+        this.#cursorKeys = this.input.keyboard.createCursorKeys();
+    }
+
+    update(){
+        const wasSpaceKeyPressed = Phaser.Input.Keyboard.JustDown(this.#cursorKeys.space);
+        if(wasSpaceKeyPressed){
+            this.#battleMenu.handlePlayerInput('OK');
+            return;
+        }else if(Phaser.Input.Keyboard.JustDown(this.#cursorKeys.shift)){
+            this.#battleMenu.handlePlayerInput('CANCEL');
+            return;
+        }
+
+        /** @type { import("../common/direction.js").Direction} */
+        let selectedDirection = DIRECTION.NONE;
+        if(this.#cursorKeys.left.isDown){
+            selectedDirection = DIRECTION.LEFT;
+        } else if(this.#cursorKeys.right.isDown){
+            selectedDirection = DIRECTION.RIGHT;
+        } else if(this.#cursorKeys.down.isDown){
+            selectedDirection = DIRECTION.DOWN;
+        } else if(this.#cursorKeys.up.isDown){
+            selectedDirection = DIRECTION.UP;
+        }
+
+        if(selectedDirection !== DIRECTION.NONE){
+            this.#battleMenu.handlePlayerInput(selectedDirection);
+        }
+
     }
 
 
@@ -92,6 +128,12 @@ export class BattleScene extends Phaser.Scene {
         this.add.image(256, 316, MONSTER_ASSET_KEYS.IGUANIGNITE, 0).setFlipX(true);
     }
 
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {Phaser.GameObjects.Container}
+     */
     #createHealthBar(x, y) {
         const letfCap = this.add.image(x, y, HEATL_BAR_ASSET_KEYS.LEFT_CAP).setOrigin(0, 0.5);
         const midleCap = this.add.image(letfCap.x + letfCap.width, y, HEATL_BAR_ASSET_KEYS.MIDDLE_CAP).setOrigin(0, 0.5);
