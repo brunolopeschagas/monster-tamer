@@ -96,7 +96,6 @@ export class BattleMenu {
             this.#switchToMainBattleMenu();
             return;
         } else if (input === 'OK') {
-            if (this.#activeBattleMenu)
                 this.hideMainBattleMenu();
             this.showMonsterAttackSubMenu();
             return;

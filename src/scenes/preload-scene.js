@@ -1,54 +1,117 @@
-import { BATTLE_ASSET_KEYS, BATTLE_BACKGROUND_ASSET_KEYS, HEATL_BAR_ASSET_KEYS, MONSTER_ASSET_KEYS, UI_ASSET_KEYS } from "../assets/asset-keys.js";
-import Phaser from "../lib/phaser.js";
-import { SCENE_KEYS } from "./scene-keys.js";
+import Phaser from '../lib/phaser.js';
+import {
+  ATTACK_ASSET_KEYS,
+  BATTLE_ASSET_KEYS,
+  BATTLE_BACKGROUND_ASSET_KEYS,
+  CHARACTER_ASSET_KEYS,
+  DATA_ASSET_KEYS,
+  HEALTH_BAR_ASSET_KEYS,
+  MONSTER_ASSET_KEYS,
+  UI_ASSET_KEYS,
+  WORD_ASSET_KEYS,
+} from '../assets/asset-keys.js';
+import { SCENE_KEYS } from './scene-keys.js';
+import { KENNEY_FUTURE_NARROW_FONT_NAME } from '../assets/font-keys.js';
+import { WebFontFileLoader } from '../assets/web-font-file-loader.js';
 
 export class PreloadScene extends Phaser.Scene {
-    constructor() {
-        super({
-            key: SCENE_KEYS.PRELOAD_SCENE,
-        });
-    }
+  constructor() {
+    super({
+      key: SCENE_KEYS.PRELOAD_SCENE,
+    });
+  }
 
-    preload() {
-        console.log(PreloadScene.name + ' preload');
-        this.load.image(
-            BATTLE_BACKGROUND_ASSET_KEYS.FOREST,
-            'assets/images/monster-tamer/battle-backgrounds/forest-background.png'
-        );
-        this.load.image(
-            BATTLE_ASSET_KEYS.HEALTH_BAR_BACKGROUND,
-            'assets/images/kenneys-assets/ui-space-expansion/custom-ui.png'
-        );
-        this.load.image(
-            HEATL_BAR_ASSET_KEYS.RIGHT_CAP,
-            'assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_right.png'
-        );
-        this.load.image(
-            HEATL_BAR_ASSET_KEYS.LEFT_CAP,
-            'assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_left.png'
-        );
-        this.load.image(
-            HEATL_BAR_ASSET_KEYS.MIDDLE_CAP,
-            'assets/images/kenneys-assets/ui-space-expansion/barHorizontal_green_mid.png'
-        );
-        this.load.image(
-            MONSTER_ASSET_KEYS.CARNODUSK,
-            'assets/images/monster-tamer/monsters/carnodusk.png'
-        );
+  preload() {
+    console.log(`[${PreloadScene.name}:preload] invoked`);
 
-        this.load.image(
-            MONSTER_ASSET_KEYS.IGUANIGNITE,
-            'assets/images/monster-tamer/monsters/iguanignite.png'
-        );
+    const monsterTamerAssetPath = 'assets/images/monster-tamer';
+    const kenneysAssetPath = 'assets/images/kenneys-assets';
+    const pimenAssetPath = 'assets/images/pimen';
+    const axulArtAssetPath = 'assets/images/axulart';
+    const pbGamesAssetPath = 'assets/images/parabellum-games';
 
-        this.load.image(
-            UI_ASSET_KEYS.CURSOR,
-            'assets/images/monster-tamer/ui/cursor.png'
-        );
-    }
+    // battle backgrounds
+    this.load.image(
+      BATTLE_BACKGROUND_ASSET_KEYS.FOREST,
+      `${monsterTamerAssetPath}/battle-backgrounds/forest-background.png`
+    );
 
-    create() {
-        console.log(PreloadScene.name + ' create');
-        this.scene.start(SCENE_KEYS.BATTLE_SCENE);
-    }
+    // battle assets
+    this.load.image(BATTLE_ASSET_KEYS.HEALTH_BAR_BACKGROUND, `${kenneysAssetPath}/ui-space-expansion/custom-ui.png`);
+
+    // health bar assets
+    this.load.image(
+      HEALTH_BAR_ASSET_KEYS.RIGHT_CAP,
+      `${kenneysAssetPath}/ui-space-expansion/barHorizontal_green_right.png`
+    );
+    this.load.image(HEALTH_BAR_ASSET_KEYS.MIDDLE, `${kenneysAssetPath}/ui-space-expansion/barHorizontal_green_mid.png`);
+    this.load.image(
+      HEALTH_BAR_ASSET_KEYS.LEFT_CAP,
+      `${kenneysAssetPath}/ui-space-expansion/barHorizontal_green_left.png`
+    );
+
+    this.load.image(
+      HEALTH_BAR_ASSET_KEYS.RIGHT_CAP_SHADOW,
+      `${kenneysAssetPath}/ui-space-expansion/barHorizontal_shadow_right.png`
+    );
+    this.load.image(
+      HEALTH_BAR_ASSET_KEYS.MIDDLE_SHADOW,
+      `${kenneysAssetPath}/ui-space-expansion/barHorizontal_shadow_mid.png`
+    );
+    this.load.image(
+      HEALTH_BAR_ASSET_KEYS.LEFT_CAP_SHADOW,
+      `${kenneysAssetPath}/ui-space-expansion/barHorizontal_shadow_left.png`
+    );
+
+    // monster assets
+    this.load.image(MONSTER_ASSET_KEYS.CARNODUSK, `${monsterTamerAssetPath}/monsters/carnodusk.png`);
+    this.load.image(MONSTER_ASSET_KEYS.IGUANIGNITE, `${monsterTamerAssetPath}/monsters/iguanignite.png`);
+
+    // ui assets
+    this.load.image(UI_ASSET_KEYS.CURSOR, `${monsterTamerAssetPath}/ui/cursor.png`);
+
+    // load json data
+    this.load.json(DATA_ASSET_KEYS.ATTACKS, 'assets/data/attacks.json');
+
+    // load custom fonts
+    this.load.addFile(new WebFontFileLoader(this.load, [KENNEY_FUTURE_NARROW_FONT_NAME]));
+
+    // load attack assets
+    this.load.spritesheet(ATTACK_ASSET_KEYS.ICE_SHARD, `${pimenAssetPath}/ice-attack/active.png`, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet(ATTACK_ASSET_KEYS.ICE_SHARD_START, `${pimenAssetPath}/ice-attack/start.png`, {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet(ATTACK_ASSET_KEYS.SLASH, `${pimenAssetPath}/slash.png`, {
+      frameWidth: 48,
+      frameHeight: 48,
+    });
+
+    this.load.image(WORD_ASSET_KEYS.WORLD_BACKGROUND, `${monsterTamerAssetPath}/map/level_background.png`)
+
+    this.load.spritesheet(
+      CHARACTER_ASSET_KEYS.PLAYER,
+      `${axulArtAssetPath}/character/custom.png`,
+      {
+        frameWidth: 64,
+        frameHeight: 88,
+      },
+    );
+    this.load.spritesheet(
+      CHARACTER_ASSET_KEYS.NPC,
+      `${pbGamesAssetPath}/characters.png`,
+      {
+        frameWidth: 16,
+        frameHeight: 16,
+      },
+    );
+  }
+
+  create() {
+    console.log(`[${PreloadScene.name}:create] invoked`);
+    this.scene.start(SCENE_KEYS.WORLD_SCENE);
+  }
 }

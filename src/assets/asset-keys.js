@@ -1,22 +1,44 @@
 export const BATTLE_BACKGROUND_ASSET_KEYS = Object.freeze({
-    FOREST: 'FOREST',
+  FOREST: 'FOREST',
 });
 
 export const MONSTER_ASSET_KEYS = Object.freeze({
-    IGUANIGNITE: 'IGUANIGNITE',
-    CARNODUSK: 'CARNODUSK'
+  IGUANIGNITE: 'IGUANIGNITE',
+  CARNODUSK: 'CARNODUSK',
 });
 
 export const BATTLE_ASSET_KEYS = Object.freeze({
-    HEALTH_BAR_BACKGROUND: 'HEALT_BAR_BACKGROUND',
+  HEALTH_BAR_BACKGROUND: 'HEALTH_BAR_BACKGROUND',
 });
 
-export const HEATL_BAR_ASSET_KEYS = Object.freeze({
-    LEFT_CAP: 'LEFT_CAP',
-    RIGHT_CAP: 'RIGHT_CAP',
-    MIDDLE_CAP: 'MIDDLE',
+export const HEALTH_BAR_ASSET_KEYS = Object.freeze({
+  LEFT_CAP: 'LEFT_CAP',
+  MIDDLE: 'MIDDLE',
+  RIGHT_CAP: 'RIGHT_CAP',
+  LEFT_CAP_SHADOW: 'LEFT_CAP_SHADOW',
+  MIDDLE_SHADOW: 'MIDDLE_SHADOW',
+  RIGHT_CAP_SHADOW: 'RIGHT_CAP_SHADOW',
 });
 
 export const UI_ASSET_KEYS = Object.freeze({
-    CURSOR: 'CURSOR',
+  CURSOR: 'CURSOR',
+});
+
+export const DATA_ASSET_KEYS = Object.freeze({
+  ATTACKS: 'ATTACKS',
+});
+
+export const ATTACK_ASSET_KEYS = Object.freeze({
+  ICE_SHARD: 'ICE_SHARD',
+  ICE_SHARD_START: 'ICE_SHARD_START',
+  SLASH: 'SLASH',
+});
+
+export const WORD_ASSET_KEYS = Object.freeze({
+  WORLD_BACKGROUND: 'WORLD_BACKGROUND',
+});
+
+export const CHARACTER_ASSET_KEYS = Object.freeze({
+  PLAYER: 'PLAYER',
+  NPC: 'NPC',
 });
