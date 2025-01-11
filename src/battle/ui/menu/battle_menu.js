@@ -12,6 +12,15 @@ const BATTLE_MENU_OPTIONS = Object.freeze({
     FLEE: 'FLEE',
 });
 
+/** @typedef {keyof typeof ATTACK_MOVE_OPTIONS} AttackMoveOptions*/
+/** @enum {AttackMoveOptions} */
+const ATTACK_MOVE_OPTIONS = Object.freeze({
+    MOVE_1: 'MOVE_1',
+    MOVE_2: 'MOVE_2',
+    MOVE_3: 'MOVE_3',
+    MOVE_4: 'MOVE_4',
+});
+
 const battleTextStyle = {
     color: 'black',
     fontSize: '30px',
@@ -38,17 +47,20 @@ export class BattleMenu {
     /**@type {Phaser.GameObjects.Image} */
     #mainBattleMenuCursorPhaserImageGameObject;
 
-      /**@type {Phaser.GameObjects.Image} */
-      #attackBattleMenuCursorPhaserImageGameObject;
-
+    /**@type {Phaser.GameObjects.Image} */
+    #attackBattleMenuCursorPhaserImageGameObject;
 
     /**@type {BattleMenuOptions} */
     #selectedBattleMenuOption;
+
+    /**@type {AttackMoveOptions} */
+    #selectedAttackMenuOption;
 
     /**@param {Phaser.Scene} scene */
     constructor(scene) {
         this.#scene = scene;
         this.#selectedBattleMenuOption = BATTLE_MENU_OPTIONS.FIGHT;
+        this.#selectedAttackMenuOption = ATTACK_MOVE_OPTIONS.MOVE_1;
         this.#createMainInfoPane();
         this.#createMainBattleMenu();
         this.#createMonsterAttackSubMenu();
@@ -81,17 +93,22 @@ export class BattleMenu {
     handlePlayerInput(input) {
         console.log(input);
         if (input === 'CANCEL') {
-            this.hideMonsterAttackSubMenu();
-            this.showMainBattleMenu();
+            this.#switchToMainBattleMenu();
             return;
         } else if (input === 'OK') {
-            this.hideMainBattleMenu();
+            if (this.#activeBattleMenu)
+                this.hideMainBattleMenu();
             this.showMonsterAttackSubMenu();
             return;
         }
 
         this.#updateSelectedBattleMenuOptionFromInput(input);
         this.#moveMainBattleMenuCursor();
+    }
+
+    #switchToMainBattleMenu() {
+        this.hideMonsterAttackSubMenu();
+        this.showMainBattleMenu();
     }
 
     /** @param {import('../../../common/direction.js').Direction} direction*/
@@ -186,7 +203,7 @@ export class BattleMenu {
             case BATTLE_MENU_OPTIONS.SWITCH:
                 this.#mainBattleMenuCursorPhaserImageGameObject.setPosition(228, BATTLE_MENU_CURSOR_POSITION.y);
                 return;
-                case BATTLE_MENU_OPTIONS.ITEM:
+            case BATTLE_MENU_OPTIONS.ITEM:
                 this.#mainBattleMenuCursorPhaserImageGameObject.setPosition(BATTLE_MENU_CURSOR_POSITION.x, 86);
                 return;
             case BATTLE_MENU_OPTIONS.FLEE:
@@ -259,6 +276,7 @@ export class BattleMenu {
             );
         this.hideMonsterAttackSubMenu();
     }
+
 
 
 }
